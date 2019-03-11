@@ -1,7 +1,7 @@
 {
   "name": "log-stdout",
   "version": "1.0.0",
-  "description": "Dead simple opinionated logger logging to stdout",
+  "description": "Logger for Node.js using console.log() only",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
