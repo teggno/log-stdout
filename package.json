@@ -5,15 +5,24 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepare": "tsc",
+    "prepublishOnly": "npm test",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "logging",
+    "console",
+    "docker"
+  ],
+  "author": "Christian Bär",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "jest": "^24.3.1",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
