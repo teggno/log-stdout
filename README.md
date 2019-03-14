@@ -1,8 +1,8 @@
 # log-stdout
 
-A logging module that logs by calling `console.log()`. Intended to be used
-together with other tools (e.g. docker) that grab lines written to
-stdout and add their own stuff such as timestamps.
+A JavaScript logging module for Node.js that logs by calling `console.log()`.
+Intended to be used together with other tools (e.g. docker) that grab lines
+written to stdout and add their own stuff such as timestamps.
 
 ## Installation
 
