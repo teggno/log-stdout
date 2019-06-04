@@ -21,7 +21,7 @@ export default function createLogger(
         i <= index
           ? (message, ...rest) => {
               const dt = formatter(message, rest);
-              console.log.call(
+              console.log.apply(
                 console,
                 dt.optionalParams
                   ? [dt.message, ...dt.optionalParams]
