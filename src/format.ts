@@ -3,18 +3,15 @@ import { inspect } from "util";
 const newlineReplacement = "\\n",
   newline = /\n/g;
 
-export default function format({
-  level,
-  message,
-  rest
-}: {
-  level: string;
-  message: Message;
-  rest?: any[];
-}) {
-  return `${level}: ${stringify(message)}${
-    rest && rest.length ? " " + rest.map(stringify).join(" ") : ""
-  }`.replace(newline, newlineReplacement);
+export default function format(level: string, message: any, rest?: any[]) {
+  return {
+    message: `${level}: ${oneLineString(message)}`,
+    optionalParams: rest ? rest.map(oneLineString) : rest
+  };
+}
+
+function oneLineString(value: any) {
+  return stringify(value).replace(newline, newlineReplacement);
 }
 
 function stringify(value: any) {
