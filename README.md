@@ -24,6 +24,7 @@ module.exports = logger;
 Use the logger:
 
 ```js
+// index.js
 const logger = require("./logger");
 
 // Log some string using the "info" log level
@@ -59,19 +60,20 @@ logger.warn("Some string", new Error("An error happened"), "more", {
 You can pass one of the following log levels to the function that is returned by
 `require("log-stdout")` (which is `createLogger()` in the above example):
 
+- silent
 - error
 - warn
 - info
 - debug
 
 The return value of the function returned by `require("log-stdout")` is an
-object that has a method for each log level. Each of these methods has the same
-name as the corresponding log level.
-Calling any of these methods will either result in log output or not depending
-on the log level the logger was created with.
+object that has a method for each log level except "silent". Each of these
+methods has the same name as the corresponding log level. Calling any of these
+methods will either result in log output or not depending on the log level the
+logger was created with.
 
 ## Log output
 
 The output of any of the log methods (e.g. `logger.debug("some message")`)
 is a string that has only a single line. Inside that string, line breaks
-as written as `\n`.
+are written as `\n`.

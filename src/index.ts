@@ -1,24 +1,24 @@
 import format, { Message } from "./format";
 
-const levels: Level[] = ["error", "warn", "info", "debug"];
+const levels: Level[] = ["silent", "error", "warn", "info", "debug"];
 
 export default function createLogger(
   level: Level,
   formatterFactory: FormatterFactory = level => (message, rest) =>
     format(level, message, rest)
 ) {
-  const index = levels.indexOf(level);
-  if (index === -1) {
+  const configuredLevelIndex = levels.indexOf(level);
+  if (configuredLevelIndex === -1) {
     throw new Error(
       `Invalid log level "${level}". Allowed levels: ${levels.join(", ")}`
     );
   }
 
-  return levels.reduce(
-    (logger, l, i) => {
-      const formatter = formatterFactory(l);
+  return levels.reduce((logger, l, i) => {
+    const formatter = formatterFactory(l);
+    if (l !== "silent") {
       logger[l] =
-        i <= index
+        i <= configuredLevelIndex
           ? (message, ...rest) => {
               const dt = formatter(message, rest);
               console.log.apply(
@@ -29,13 +29,14 @@ export default function createLogger(
               );
             }
           : noOp;
-      return logger;
-    },
-    {} as Logger
-  );
+    }
+
+    return logger;
+  }, {} as Logger);
 }
 
-export type Level = "error" | "warn" | "info" | "debug";
+export type CallableLevel = "error" | "warn" | "info" | "debug";
+export type Level = "silent" | CallableLevel;
 
 export interface LogData {
   level: Level;
@@ -47,7 +48,7 @@ interface LogFn {
   (message: Message, ...rest: any[]): void;
 }
 
-type Logger = { [x in Level]: LogFn };
+type Logger = { [x in CallableLevel]: LogFn };
 
 const noOp: LogFn = () => {};
 
