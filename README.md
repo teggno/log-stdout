@@ -16,7 +16,7 @@ Create a log object when your application starts:
 // logger.js
 const createLogger = require("log-stdout");
 
-const logger = createLogger("debug");
+const logger = createLogger(process.env.LOG_LEVEL || "debug");
 
 module.exports = logger;
 ```
@@ -31,7 +31,7 @@ logger.info("Some string");
 // Output:
 // info: Some string
 
-// Log a couple of strings and numbers using the "debug" log level
+// Log a couple of strings and numbers using the "error" log level
 logger.error("Some string", 7, "also a string", 8);
 // Output:
 // error: Some string 7 also a string 8
